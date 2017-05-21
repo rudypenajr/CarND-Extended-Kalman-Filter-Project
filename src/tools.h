@@ -29,6 +29,15 @@ public:
   */
   MatrixXd CalculateJacobian(const VectorXd& x_state);
 
+  /**
+  * A helper method to convert cartesian state to polar.
+  */
+  MatrixXd CartesianToPolar(const Eigen::VectorXd& x_cartesian);
+
+  /**
+  * A helper method to convert polar state to cartesian.
+  */
+  MatrixXd PolarToCartesian(const Eigen::VectorXd& x_polar);
 };
 
 #endif /* TOOLS_H_ */
