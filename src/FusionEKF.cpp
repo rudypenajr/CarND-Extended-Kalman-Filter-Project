@@ -12,7 +12,6 @@ using std::vector;
  * Constructor.
  */
 FusionEKF::FusionEKF() {
-  cout << "FusionEKF Initializing ..." << endl;
   is_initialized_ = false;
 
   previous_timestamp_ = 0;
@@ -39,18 +38,21 @@ FusionEKF::FusionEKF() {
   */
   ekf_.F_ = MatrixXd(4, 4);
   ekf_.F_ << 1, 0, 1, 0,
-              0, 1, 0, 1,
-              0, 0, 1, 0,
-              0, 0, 0, 1;
+             0, 1, 0, 1,
+             0, 0, 1, 0,
+             0, 0, 0, 1;
 
   ekf_.P_ = MatrixXd(4, 4);
   ekf_.P_ << 1, 0, 0, 0,
-              0, 1, 0, 0,
-              0, 0, 1000, 0,
-              0, 0, 0, 1000;
+             0, 1, 0, 0,
+             0, 0, 1000, 0,
+             0, 0, 0, 1000;
 
   H_laser_ << 1, 0, 0, 0,
               0, 1, 0, 0;
+
+  noise_ax = 9;
+  noise_ay = 9;
 }
 
 /**
@@ -83,11 +85,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       */
       // Populate position and velocity
       ekf_.x_ << tools.PolarToCartesian(measurement_pack.raw_measurements_);
-      // // Confident in both position and velocity
-      // ekf_.P_ << 1, 0, 0, 0,
-      //             0, 1, 0, 0,
-      //             0, 0, 1, 0,
-      //             0, 0, 0, 1;
     }
     else if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) {
       /**
@@ -95,8 +92,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       */
       // Populate position
       ekf_.x_ << measurement_pack.raw_measurements_(0), measurement_pack.raw_measurements_(1), 0, 0;
-      // Unsure about velocity
-
     }
 
     // done initializing, no need to predict or update
@@ -126,7 +121,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   float dt_4 = dt_3 * dt;
 
   //Modify the F matrix so that the time is integrated
-  cout << "print dt ===> " << dt << endl;
+  // cout << "print dt ===> " << dt << endl;
   ekf_.F_(0, 2) = dt;
   ekf_.F_(1, 3) = dt;
 

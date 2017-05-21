@@ -51,8 +51,23 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   TODO:
     * update the state by using Extended Kalman Filter equations
   */
-    VectorXd z_pred(3, 1);
-    z_pred << tool.CartesianToPolar(x_);
+
+    float rho = sqrt((x_[0] * x_[0]) + (x_[1] * x_[1]));
+    float phi;
+    float rho_dot;
+
+    if (x_[0] != 0) {
+      phi= atan2(x_[1], x_[0]);
+      rho_dot = ((x_[0] * x_[2] + x_[1] * x_[3]) / rho);
+    } else {
+      phi= 0;
+      rho_dot = 0;
+    }
+
+    MatrixXd z_pred(3, 1);
+    z_pred << rho, phi, rho_dot;
+    // z_pred << tool.CartesianToPolar(x_);
+
     VectorXd y = z - z_pred;
     MatrixXd Ht = H_.transpose();
     MatrixXd S = H_ * P_ * Ht + R_;

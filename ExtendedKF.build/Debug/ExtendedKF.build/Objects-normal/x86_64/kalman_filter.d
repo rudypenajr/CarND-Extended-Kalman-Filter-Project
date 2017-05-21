@@ -150,4 +150,5 @@ dependencies: \
   /Users/rudypena/Sites/carnd/CarND-Extended-Kalman-Filter-Project/src/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
   /Users/rudypena/Sites/carnd/CarND-Extended-Kalman-Filter-Project/src/Eigen/src/Eigenvalues/RealQZ.h \
   /Users/rudypena/Sites/carnd/CarND-Extended-Kalman-Filter-Project/src/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
-  /Users/rudypena/Sites/carnd/CarND-Extended-Kalman-Filter-Project/src/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h
+  /Users/rudypena/Sites/carnd/CarND-Extended-Kalman-Filter-Project/src/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+  /Users/rudypena/Sites/carnd/CarND-Extended-Kalman-Filter-Project/src/tools.h
