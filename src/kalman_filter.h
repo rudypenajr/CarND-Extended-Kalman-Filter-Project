@@ -74,7 +74,7 @@ private:
   void SetNewEstimate(const Eigen::VectorXd &x_,
                       const Eigen::MatrixXd &K,
                       const Eigen::VectorXd &y,
-                      const Eigen::MatrixXd &H_)
+                      const Eigen::MatrixXd &H_);
 };
 
 #endif /* KALMAN_FILTER_H_ */
