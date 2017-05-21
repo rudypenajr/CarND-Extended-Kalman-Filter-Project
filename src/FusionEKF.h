@@ -9,6 +9,8 @@
 #include "kalman_filter.h"
 #include "tools.h"
 
+using namespace std;
+
 class FusionEKF {
 public:
   /**

@@ -23,6 +23,10 @@ public:
   // measurement covariance matrix
   Eigen::MatrixXd R_;
 
+  //
+  float noise_ax;
+  float noise_ay;
+
   /**
    * Constructor
    */
@@ -53,17 +57,24 @@ public:
   void Predict();
 
   /**
+   * For LIDAR
    * Updates the state by using standard Kalman Filter equations
    * @param z The measurement at k+1
    */
   void Update(const Eigen::VectorXd &z);
 
   /**
+   * For RADAR
    * Updates the state by using Extended Kalman Filter equations
    * @param z The measurement at k+1
    */
   void UpdateEKF(const Eigen::VectorXd &z);
 
+private:
+  void SetNewEstimate(const Eigen::VectorXd &x_,
+                      const Eigen::MatrixXd &K,
+                      const Eigen::VectorXd &y,
+                      const Eigen::MatrixXd &H_)
 };
 
 #endif /* KALMAN_FILTER_H_ */

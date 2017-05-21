@@ -12,6 +12,7 @@ using std::vector;
  * Constructor.
  */
 FusionEKF::FusionEKF() {
+  cout << "FusionEKF Initializing ..." << endl;
   is_initialized_ = false;
 
   previous_timestamp_ = 0;
@@ -36,8 +37,7 @@ FusionEKF::FusionEKF() {
     * Finish initializing the FusionEKF.
     * Set the process and measurement noises
   */
-
-
+  ekf_.Init();
 }
 
 /**
