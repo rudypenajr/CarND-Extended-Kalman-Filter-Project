@@ -96,27 +96,20 @@ MatrixXd Tools::CartesianToPolar(const Eigen::VectorXd& x_cartesian) {
     float py = x_cartesian(1);
     float vx = x_cartesian(2);
     float vy = x_cartesian(3);
-    float rho = 0, phi, rho_dot;
+    float rho = 0;
+    float phi = 0;
+    float rho_dot = 0;
 
-    if (px != 0) {
-      // Compute Radial distance
-      rho = sqrt(px*py + px*py);
+    // Compute Radial distance
+    rho = sqrt(px*py + px*py);
 
-      // Compute Bearing Angle (phi)
-      // Note: Per Tips from Udacity, Radians must be in range[-pi, pi].
-      phi = atan2(px, py);
+    // Compute Bearing Angle (phi)
+    // Note: Per Tips from Udacity, Radians must be in range[-pi, pi].
+    phi = atan2(px, py);
 
-      // Compute Radial Velocity
-      // Like Javascript!
-      rho_dot = (rho > thresh) ? ( px * vx + py * vy ) / rho : 0;
-
-      // if (rho < thresh) {
-        // cout <<  "WARNING - CartesianToPolar() - Division by Zero!" <<endl;
-      // }
-    } else {
-      phi = 0;
-      rho_dot = 0;
-    }
+    // Compute Radial Velocity
+    // Like Javascript!
+    rho_dot = (rho > thresh) ? ( px * vx + py * vy ) / rho : 0;
 
     polar_vector << rho, phi, rho_dot;
     return polar_vector;
