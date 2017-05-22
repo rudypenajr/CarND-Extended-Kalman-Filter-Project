@@ -64,8 +64,16 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     // z_pred << tool.CartesianToPolar(x_);
 
     VectorXd y = z - z_pred;
+    while (y(1) > M_PI)
+    {
+      y(1) -= 2 * M_PI;
+    }
+    while (y(1) <- M_PI)
+    {
+      y(1) += 2 * M_PI;
+    }
     // fmod - returns the floating-point remainder of numer/denom (rounded towards zero)
-    y(1) = fmod(y(1), M_PI);
+    // y(1) = fmod(y(1), M_PI);
     MatrixXd Ht = H_.transpose();
     MatrixXd S = H_ * P_ * Ht + R_;
     MatrixXd Si = S.inverse();
